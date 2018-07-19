@@ -13,15 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -*/
-package to.lova.spring.blaze;
+package to.lova.spring.blaze.entity;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
-@SpringBootApplication
-public class SpringBlazeApplication {
+@Embeddable
+public class Comment {
+    private String comment;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private User commenter;
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBlazeApplication.class, args);
+    public String getComment() {
+        return this.comment;
     }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public User getCommenter() {
+        return this.commenter;
+    }
+
+    public void setCommenter(User commenter) {
+        this.commenter = commenter;
+    }
+
 }

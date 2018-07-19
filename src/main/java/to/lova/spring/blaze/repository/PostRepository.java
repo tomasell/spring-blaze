@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -*/
-package to.lova.spring.blaze;
+package to.lova.spring.blaze.repository;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@SpringBootApplication
-public class SpringBlazeApplication {
+import to.lova.spring.blaze.entity.Post;
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBlazeApplication.class, args);
-    }
+public interface PostRepository extends JpaRepository<Post, Integer> {
+
 }

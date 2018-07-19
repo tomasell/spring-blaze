@@ -13,15 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -*/
-package to.lova.spring.blaze;
+package to.lova.spring.blaze.view;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.List;
 
-@SpringBootApplication
-public class SpringBlazeApplication {
+import com.blazebit.persistence.view.EntityView;
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBlazeApplication.class, args);
-    }
+import to.lova.spring.blaze.entity.Post;
+
+@EntityView(Post.class)
+public interface PostDetailView extends PostListView {
+
+    @Override
+    Integer getId();
+
+    List<CommentView> getComments();
 }
