@@ -16,12 +16,14 @@
 package to.lova.spring.blaze.view;
 
 import com.blazebit.persistence.view.EntityView;
+import com.blazebit.persistence.view.IdMapping;
 
 import to.lova.spring.blaze.entity.Post;
 
 @EntityView(Post.class)
 public interface PostListView {
 
+    @IdMapping
     Integer getId();
 
     String getText();

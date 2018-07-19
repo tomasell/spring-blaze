@@ -28,12 +28,16 @@ import javax.persistence.OrderColumn;
 
 @Entity
 public class Post {
+
     @Id
     @GeneratedValue
     private Integer id;
+
     private String text;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User poster;
+
     @ElementCollection
     @OrderColumn
     private List<Comment> comments = new ArrayList<>();

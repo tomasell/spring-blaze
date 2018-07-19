@@ -23,11 +23,15 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
+
     @Id
     @GeneratedValue
     private Integer id;
+
     private String userName;
+
     private String email;
+
     private Date registrationDate;
 
     public String getUserName() {

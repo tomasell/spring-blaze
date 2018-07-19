@@ -21,7 +21,9 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class Comment {
+
     private String comment;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User commenter;
 

@@ -21,6 +21,7 @@ import to.lova.spring.blaze.entity.Comment;
 
 @EntityView(Comment.class)
 public interface CommentView {
+
     String getComment();
 
     UserNameView getCommenter();

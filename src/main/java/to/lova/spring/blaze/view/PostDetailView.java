@@ -24,8 +24,5 @@ import to.lova.spring.blaze.entity.Post;
 @EntityView(Post.class)
 public interface PostDetailView extends PostListView {
 
-    @Override
-    Integer getId();
-
     List<CommentView> getComments();
 }

@@ -16,10 +16,15 @@
 package to.lova.spring.blaze.view;
 
 import com.blazebit.persistence.view.EntityView;
+import com.blazebit.persistence.view.IdMapping;
 
 import to.lova.spring.blaze.entity.User;
 
 @EntityView(User.class)
 public interface UserNameView {
+
+    @IdMapping
+    Integer getId();
+
     String getUserName();
 }
