@@ -32,6 +32,7 @@ import to.lova.spring.blaze.entity.Comment;
 import to.lova.spring.blaze.entity.Post;
 import to.lova.spring.blaze.entity.User;
 import to.lova.spring.blaze.repository.PostWithCommentCountViewRepository;
+import to.lova.spring.blaze.repository.PostWithPosterCommentCountViewRepository;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -73,6 +74,13 @@ public class SpringBlazeApplicationTests {
     @Test
     public void testPostWithCommentCountView(
             @Autowired PostWithCommentCountViewRepository repository) {
+        var articles = repository.findAll();
+        assertEquals(2L, articles.get(0).getCommentCount().longValue());
+    }
+
+    @Test
+    public void testPostWithPosterCommentCountView(
+            @Autowired PostWithPosterCommentCountViewRepository repository) {
         var articles = repository.findAll();
         assertEquals(2L, articles.get(0).getCommentCount().longValue());
     }

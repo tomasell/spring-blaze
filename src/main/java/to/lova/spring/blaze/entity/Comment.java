@@ -33,6 +33,9 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User commenter;
 
+    // @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    // private Post post;
+
     public Integer getId() {
         return this.id;
     }
