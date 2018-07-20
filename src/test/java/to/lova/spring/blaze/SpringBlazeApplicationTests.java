@@ -31,8 +31,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import to.lova.spring.blaze.entity.Comment;
 import to.lova.spring.blaze.entity.Post;
 import to.lova.spring.blaze.entity.User;
-import to.lova.spring.blaze.repository.PostDetailViewRepository;
-import to.lova.spring.blaze.repository.PostListViewRepository;
+import to.lova.spring.blaze.repository.PostWithCommentCountViewRepository;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -44,43 +43,38 @@ public class SpringBlazeApplicationTests {
 
     @BeforeEach
     public void populateRepository() {
-        var p1 = new User();
-        p1.setUserName("Giovanni");
-        this.em.persist(p1);
+        var u1 = new User();
+        u1.setUserName("Giovanni");
+        this.em.persist(u1);
 
-        var p2 = new User();
-        p2.setUserName("Alex");
-        this.em.persist(p2);
+        var u2 = new User();
+        u2.setUserName("Alex");
+        this.em.persist(u2);
 
-        var a1 = new Post();
-        a1.setPoster(p1);
+        var p1 = new Post();
+        p1.setPoster(u1);
         var c1 = new Comment();
         c1.setComment("First comment.");
-        c1.setCommenter(p1);
+        c1.setCommenter(u1);
+        this.em.persist(c1);
+
         var c2 = new Comment();
         c2.setComment("It works!");
-        c2.setCommenter(p2);
-        a1.setComments(List.of(c1, c2));
-        this.em.persist(a1);
+        c2.setCommenter(u2);
+        this.em.persist(c2);
+
+        p1.setComments(List.of(c1, c2));
+        this.em.persist(p1);
 
         this.em.flush();
         this.em.clear();
     }
 
     @Test
-    public void testFindAllViews(@Autowired PostListViewRepository repository) {
+    public void testPostWithCommentCountView(
+            @Autowired PostWithCommentCountViewRepository repository) {
         var articles = repository.findAll();
-        assertEquals(1, articles.size());
-        assertEquals("Giovanni", articles.get(0).getPoster().getUserName());
-    }
-
-    @Test
-    public void testFindDetailViews(
-            @Autowired PostDetailViewRepository repository) {
-        var articles = repository.findAll();
-        assertEquals(1, articles.size());
-        assertEquals("Giovanni", articles.get(0).getPoster().getUserName());
-        assertEquals(2, articles.get(0).getComments().size());
+        assertEquals(2L, articles.get(0).getCommentCount().longValue());
     }
 
 }

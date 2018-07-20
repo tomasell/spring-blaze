@@ -13,20 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -*/
-package to.lova.spring.blaze.view;
+package to.lova.spring.blaze.repository;
 
-import com.blazebit.persistence.view.EntityView;
-import com.blazebit.persistence.view.IdMapping;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import to.lova.spring.blaze.entity.Comment;
+import to.lova.spring.blaze.view.PostWithCommentCountView;
 
-@EntityView(Comment.class)
-public interface CommentView {
+public interface PostWithCommentCountViewRepository
+        extends JpaRepository<PostWithCommentCountView, Integer> {
 
-    @IdMapping
-    Integer getId();
-
-    String getComment();
-
-    UserNameView getCommenter();
 }

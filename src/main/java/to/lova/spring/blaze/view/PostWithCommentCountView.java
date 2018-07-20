@@ -17,16 +17,19 @@ package to.lova.spring.blaze.view;
 
 import com.blazebit.persistence.view.EntityView;
 import com.blazebit.persistence.view.IdMapping;
+import com.blazebit.persistence.view.Mapping;
 
-import to.lova.spring.blaze.entity.Comment;
+import to.lova.spring.blaze.entity.Post;
 
-@EntityView(Comment.class)
-public interface CommentView {
+@EntityView(Post.class)
+public interface PostWithCommentCountView {
 
     @IdMapping
     Integer getId();
 
-    String getComment();
+    String getText();
 
-    UserNameView getCommenter();
+    @Mapping("SIZE(comments)")
+    Long getCommentCount();
+
 }

@@ -18,12 +18,12 @@ package to.lova.spring.blaze.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 
 @Entity
@@ -38,7 +38,7 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private User poster;
 
-    @ElementCollection
+    @OneToMany
     @OrderColumn
     private List<Comment> comments = new ArrayList<>();
 
