@@ -16,15 +16,14 @@
 package to.lova.spring.blaze.view;
 
 import com.blazebit.persistence.view.EntityView;
-import com.blazebit.persistence.view.IdMapping;
 
 import to.lova.spring.blaze.entity.Comment;
 
 @EntityView(Comment.class)
 public interface CommentView {
 
-    @IdMapping
-    Integer getId();
+    // @IdMapping
+    // Integer getId();
 
     String getComment();
 

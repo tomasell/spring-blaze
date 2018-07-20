@@ -57,12 +57,12 @@ public class SpringBlazeApplicationTests {
         var c1 = new Comment();
         c1.setComment("First comment.");
         c1.setCommenter(u1);
-        this.em.persist(c1);
+        // this.em.persist(c1);
 
         var c2 = new Comment();
         c2.setComment("It works!");
         c2.setCommenter(u2);
-        this.em.persist(c2);
+        // this.em.persist(c2);
 
         p1.setComments(List.of(c1, c2));
         this.em.persist(p1);
@@ -82,7 +82,9 @@ public class SpringBlazeApplicationTests {
     public void testPostWithPosterCommentCountView(
             @Autowired PostWithPosterCommentCountViewRepository repository) {
         var articles = repository.findAll();
+        assertEquals(1L, articles.size());
         assertEquals(2L, articles.get(0).getCommentCount().longValue());
+        assertEquals(1L, articles.get(0).getPosterCommentCount().longValue());
     }
 
 }

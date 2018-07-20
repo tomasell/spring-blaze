@@ -23,18 +23,29 @@ import com.blazebit.persistence.view.SubqueryProvider;
 import to.lova.spring.blaze.entity.Post;
 
 @EntityView(Post.class)
-public interface PostWithPosterCommentCountView {
+public interface PostWithPosterCommentCountView
+        extends PostWithCommentCountView {
+
     @MappingSubquery(CommentCountProvider.class)
-    Long getCommentCount();
+    Long getPosterCommentCount();
+    // using @Entity
+    // class CommentCountProvider implements SubqueryProvider {
+    // @Override
+    // public <T> T createSubquery(SubqueryInitiator<T> subqueryInitiator) {
+    // return subqueryInitiator.from(Post.class, "my_post_")
+    // .where("my_post_.comments.id")
+    // .eq("embedding_view(comments.id)").select("count(*)")
+    // .where("my_post_.comments.commenter")
+    // .eqExpression("embedding_view(poster)").end();
+    // }
+    // }
 
     class CommentCountProvider implements SubqueryProvider {
         @Override
         public <T> T createSubquery(SubqueryInitiator<T> subqueryInitiator) {
-            return subqueryInitiator.from(Post.class, "my_post_")
-                    .where("my_post_.comments.id")
-                    .eq("embedding_view(comments.id)").select("count(*)")
-                    .where("my_post_.comments.commenter")
-                    .eqExpression("embedding_view(poster)").end();
+            return subqueryInitiator.from("EMBEDDING_VIEW(comments)", "com")
+                    .select("count(*)").where("com.commenter")
+                    .eqExpression("EMBEDDING_VIEW(poster)").end();
         }
     }
 }

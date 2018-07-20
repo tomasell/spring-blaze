@@ -15,18 +15,16 @@
 -*/
 package to.lova.spring.blaze.entity;
 
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Embeddable
 public class Comment {
 
-    @Id
-    @GeneratedValue
-    private Integer id;
+    // @Id
+    // @GeneratedValue
+    // private Integer id;
 
     private String comment;
 
@@ -36,9 +34,9 @@ public class Comment {
     // @ManyToOne(fetch = FetchType.LAZY, optional = false)
     // private Post post;
 
-    public Integer getId() {
-        return this.id;
-    }
+    // public Integer getId() {
+    // return this.id;
+    // }
 
     public String getComment() {
         return this.comment;
