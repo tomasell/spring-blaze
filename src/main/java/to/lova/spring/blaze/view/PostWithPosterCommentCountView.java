@@ -32,7 +32,7 @@ public interface PostWithPosterCommentCountView {
         public <T> T createSubquery(SubqueryInitiator<T> subqueryInitiator) {
             return subqueryInitiator.from(Post.class, "my_post_")
                     .where("my_post_.comments.id")
-                    .eq("embedding_view(comments.id)").select("count(*)")
+                    .eqExpression("embedding_view(comments.id)").select("count(*)")
                     .where("my_post_.comments.commenter")
                     .eqExpression("embedding_view(poster)").end();
         }
